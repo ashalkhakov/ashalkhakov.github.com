@@ -25,9 +25,7 @@
 	<h1>The setup</h1>
 	<p>Below, we are setting up everything to be able to compile
 	  Ur/Web from sources.</p>
-	<pre>
-	  <code>
-sudo apt-get install emacs-goodies-el
+	<pre><code>sudo apt-get install emacs-goodies-el
 sudo apt-get install build-essential git mlton autoconf libssl-dev
 sudo apt-get install libpq-dev libmysqlclient-dev libsqlite3-dev
 git clone https://github.com/urweb/urweb.git
@@ -41,9 +39,7 @@ sudo make install
 # install a mode for emacs
 touch ~/.emacs
 echo '(add-to-list '"'"'load-path "/usr/local/share/emacs/site-lisp/urweb-mode")' >> ~/.emacs
-echo '(load "urweb-mode-startup")' >> ~/.emacs
-	  </code>
-	</pre>
+echo '(load "urweb-mode-startup")' >> ~/.emacs</code></pre>
 
 	<p>Next, we'll be setting up Emacs to work with MLton using the
 	  corresponding
@@ -54,17 +50,13 @@ echo '(load "urweb-mode-startup")' >> ~/.emacs
 	  (allows Emacs to invoke a build tool in background as soon as a
 	  source file is changed, refreshing the def-use file).</p>
     
-	<pre>
-	  <code>
-cd
+	<pre><code>cd
 git clone https://github.com/ashalkhakov/mlton-emacs
 echo "(add-to-list 'load-path \"`pwd`/mlton-emacs/\")" >> ~/.emacs
 echo "(require 'esml-du-mlton)" >> ~/.emacs
 echo "(def-use-mode)" >> ~/.emacs
 echo "(require 'bg-build-mode)" >> ~/.emacs
-echo "(bg-build-mode)" >> ~/.emacs
-	  </code>
-	</pre>
+echo "(bg-build-mode)" >> ~/.emacs</code></pre>
 	<p>Finally, please fire-up Emacs and do the following:</p>
 	<ul>
 	  <li><strong><code>M-x package-list-packages</code></strong></li>

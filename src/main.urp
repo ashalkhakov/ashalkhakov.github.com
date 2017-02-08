@@ -1,0 +1,21 @@
+html5
+exe ../bin/site
+debug
+ffi tagffi
+allow url *
+script  https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js
+script  https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js
+script  https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js
+script  /s/app.js
+rewrite style Styling/s_* [-]
+# rewrite rules
+rewrite url Main/main main.html
+rewrite url Urweb_setup/main urweb-setup.html
+# end of rewrite rules
+allow meta author
+allow meta viewport
+
+styling
+template
+urweb_setup
+main

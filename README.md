@@ -5,5 +5,5 @@ Preparation
 -----------
 
 ````
-git clone https://github.com/ashalkhakov/ashalkhakov.github.com.git --branch gh-pages dist
+git clone https://github.com/ashalkhakov/ashalkhakov.github.com.git --branch master dist
 ````

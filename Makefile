@@ -36,4 +36,4 @@ clean:
 	rm -rf dist
 
 deploy: all
-	cd dist && git add --all && git commit -m \"Release at $(date)\" && git push
+	cd dist && git add --all && git commit -m "Release at \"`date`\"" && git push

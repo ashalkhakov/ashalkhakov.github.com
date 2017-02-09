@@ -36,4 +36,4 @@ clean:
 	rm -rf dist
 
 deploy: all
-	git subtree push --prefix dist origin gh-pages
+	cd dist && git add --all && git commit -m \"Release at $(date)\" && git push

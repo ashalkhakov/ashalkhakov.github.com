@@ -5,7 +5,7 @@ PAGES_HTML := $(subst _,-,$(patsubst %.ur,%.html,$(PAGES_SRC)))
 STYLES := $(wildcard css/*.css)
 STYLES_DIST := $(patsubst %.css,dist/%.css,$(STYLES))
 
-.PHONY: all clean test
+.PHONY: all clean deploy
 
 bin/site: src/main.urp
 	mkdir -p bin
@@ -34,3 +34,6 @@ all: $(STYLES_DIST)
 clean:
 	rm -rf bin
 	rm -rf dist
+
+deploy: all
+	git subtree push --prefix dist origin gh-pages

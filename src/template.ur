@@ -7,8 +7,8 @@ template_main (content : {Title: string, Page : xbody}): page = <xml>
     <meta name="author" content="Artyom Shalkhakov" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/skeleton.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/skeleton.css" />
   </head>           
   <body>
     <div class="s_container">

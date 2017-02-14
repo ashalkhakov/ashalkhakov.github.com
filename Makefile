@@ -7,17 +7,19 @@ STYLES_DIST := $(patsubst %.css,dist/%.css,$(STYLES))
 
 .PHONY: all clean deploy dev
 
+dist:
+	git clone https://github.com/ashalkhakov/ashalkhakov.github.com.git --branch master dist
+all: dist
+
 bin/site: src/main.urp
 	mkdir -p bin
 	urweb -protocol static src/main
 
-$(PAGES_HTML): bin/site
-	mkdir -p dist
+$(PAGES_HTML): bin/site dist
 	bin/site /$@ | tail -n+3 > dist/$@
 all: $(PAGES_HTML)
 
-articles.html: bin/site
-	mkdir -p dist
+articles.html: bin/site dist
 	bin/site /$@ | tail -n+3 > dist/$@
 all: articles.html
 
@@ -26,12 +28,11 @@ $(ARTICLES_HTML): bin/site
 	bin/site /$@ | tail -n+3 > dist/$@
 all: $(ARTICLES_HTML)
 
-dist/html2pats.html:
-	mkdir -p dist
+dist/html2pats.html: dist
 	cp html2pats.html dist/html2pats.html
 all: dist/html2pats.html
 
-dist/css/%.css: css/%.css
+dist/css/%.css: css/%.css dist
 	mkdir -p dist/css
 	cp $< $@
 all: $(STYLES_DIST)
@@ -41,7 +42,7 @@ dev: all
 
 clean:
 	rm -rf bin
-	rm -rf dist
+	cd dist && git reset --hard HEAD
 
 deploy: all
 	cd dist && git add --all && git commit -m "Release at \"`date`\"" && git push

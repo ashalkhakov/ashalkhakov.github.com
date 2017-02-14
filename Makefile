@@ -5,7 +5,7 @@ PAGES_HTML := $(subst _,-,$(patsubst %.ur,%.html,$(PAGES_SRC)))
 STYLES := $(wildcard css/*.css)
 STYLES_DIST := $(patsubst %.css,dist/%.css,$(STYLES))
 
-.PHONY: all clean deploy
+.PHONY: all clean deploy dev
 
 bin/site: src/main.urp
 	mkdir -p bin
@@ -15,6 +15,11 @@ $(PAGES_HTML): bin/site
 	mkdir -p dist
 	bin/site /$@ | tail -n+3 > dist/$@
 all: $(PAGES_HTML)
+
+articles.html: bin/site
+	mkdir -p dist
+	bin/site /$@ | tail -n+3 > dist/$@
+all: articles.html
 
 $(ARTICLES_HTML): bin/site
 	mkdir -p dist/articles
@@ -30,6 +35,9 @@ dist/css/%.css: css/%.css
 	mkdir -p dist/css
 	cp $< $@
 all: $(STYLES_DIST)
+
+dev: all
+	cd dist && python -m SimpleHTTPServer 8000
 
 clean:
 	rm -rf bin

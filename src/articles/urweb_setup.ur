@@ -1,10 +1,11 @@
 open Tagffi
 
 fun
-main () =
+main (nav: list {Title : string, Url : url}): transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Setting up Ur/Web for development on Ubuntu 16.10",
+Navigation = nav,
 Page= <xml>
   <h1>Preface</h1>
   <p>It can take a while to wade through the docs about SML

@@ -1,7 +1,37 @@
-fun main () : transaction page =
+fun
+topmenu (): list {Title : string, Url : url} =
+{Title= "Main", Url= url (main ())}
+    :: {Title= "Articles", Url= url (articles_main ())}
+    :: []
+
+(* ****** ****** *)
+
+and
+articles_main (): transaction page =
+return (
+Template.template_main {
+Title= "Underivable - Articles",
+Navigation= topmenu (),
+Page= <xml>
+  <h1>Articles</h1>
+  <ul>
+    <li><a href={url (articles_urweb_setup ())}>Ur/Web dev box setup</a></li>
+  </ul>
+</xml>
+})
+
+and
+articles_urweb_setup () =
+Urweb_setup.main (topmenu ())
+
+(* ****** ****** *)
+
+and
+main () : transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Home",
+Navigation= topmenu (),
 Page= <xml>
   <h1>Welcome to Underivable</h1>
   <p>This website will host certain curiousities, such as
@@ -15,10 +45,6 @@ Page= <xml>
       a Tetris clone structured according to
       the <a href="https://sam.js.org"><strong>SAM (State, Action,
 	Model)</strong></a> pattern. A bit unfinished (only keyboard input is supported).</li>
-  </ul>
-  <h4>Notes:</h4>
-  <ul>
-    <li><a href={url (Urweb_setup.main ())}>Ur/Web dev box setup</a></li>
   </ul>
 </xml>
 })

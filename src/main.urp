@@ -6,12 +6,14 @@ allow url *
 rewrite style Styling/s_* [-]
 # rewrite rules
 rewrite url Index/main index.html
-rewrite url Urweb_setup/main articles/urweb-setup.html
+rewrite url Index/articles_main articles.html
+rewrite url Index/articles_urweb_setup articles/urweb-setup.html
 # end of rewrite rules
 allow meta author
 allow meta viewport
 
 styling
+$/list
 template
 articles/urweb_setup
 index

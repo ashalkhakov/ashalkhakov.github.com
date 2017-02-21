@@ -8,12 +8,18 @@ rewrite style Styling/s_* [-]
 rewrite url Index/main index.html
 rewrite url Index/articles_main articles.html
 rewrite url Index/articles_urweb_setup articles/urweb-setup.html
+rewrite url Index/split_calculator split-calculator.html
 # end of rewrite rules
 allow meta author
 allow meta viewport
+# start of libraries
+library $UTIL/util
+# end of libraries
 
 styling
 $/list
+$/monad
 template
 articles/urweb_setup
+split_calculator
 index

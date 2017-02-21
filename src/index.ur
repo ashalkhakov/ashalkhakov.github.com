@@ -2,6 +2,7 @@ fun
 topmenu (): list {Title : string, Url : url} =
 {Title= "Main", Url= url (main ())}
     :: {Title= "Articles", Url= url (articles_main ())}
+    :: {Title= "Split calculator", Url= url (split_calculator ())}
     :: []
 
 (* ****** ****** *)
@@ -23,6 +24,12 @@ Page= <xml>
 and
 articles_urweb_setup () =
 Urweb_setup.main (topmenu ())
+
+(* ****** ****** *)
+
+and
+split_calculator () =
+Split_calculator.main ()
 
 (* ****** ****** *)
 

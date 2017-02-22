@@ -4,9 +4,10 @@
 initial state: input users and their amounts (add, remove, edit users), press the calculate button (after this, goes to calculated state)
 - how do we map string to float and back for entry by user?
 - basically done, but how do we show automatic summarization of all contribs?
-
-calculated state: show editable lists
  *)
+
+(* ****** ****** *)
+(* model and its associated actions *)
 
 datatype appPage = Initial | Calculation
 
@@ -15,14 +16,22 @@ type chip_in = {Total : float, EqualPayment : float}
 type payback = {From : string, To : string, Amount : float, Complete : bool}
 type contrib_list = {Contribs : Dlist.dlist contrib, Page : source appPage}
 
-fun make_contrib () =
+fun
+init () =
+rows <- Dlist.create;
+pos <- source Initial;
+return {Contribs = rows,
+        Page = pos}
+
+fun insert_contrib model =
     pname <- source "";
     amount <- source (Some 0.0);
-    return {PersonName = pname, Amount = amount}
-fun insert contribs =
-    row <- make_contrib ();
-    Monad.ignore (Dlist.append contribs row)
-fun delete pos = Dlist.delete pos
+    let
+	val row = {PersonName = pname, Amount = amount}
+    in
+	Monad.ignore (Dlist.append model.Contribs row)
+    end
+fun delete_contrib model pos = Dlist.delete pos
 
 fun is_valid (dl: contrib_list): signal (list string)(*validation error*) =
     r <- Dlist.size (dl.Contribs);
@@ -115,59 +124,57 @@ let
 in
     step ()
 end
-    
-fun display_contrib {PersonName = pname, Amount = amt} pos = <xml>
-  <ctextbox source={pname} required={True}/>
-  <cnumber source={amt} min={0.01} step={0.01} required={True} /><br/>
-  <button value="Delete" onclick={fn _ => delete pos}/>
-</xml>
 
-    (*
-TODO: improving forms with ARIA attribs
-https://www.sitepoint.com/html5-form-validation/
+fun calculate model = set model.Page Calculation
+fun to_initial model = set model.Page Initial
 
-TODO: More logic:
-- all names are pairwise disjoint (give an error as this might confuse people!)
-- when things are valid, a NEXT button appears (becomes active/clickable)
-			 - this button will trigger calculation + showing the next screen
+(* ****** ****** *)
+(* view *)
 
-how to switch between two screens:
-- need more model state (e.g. if we are on the first screen)
-- see which screen we are on... proceed as requested when rendering it
-*)
+fun view_init (model: contrib_list)
+	      (summary : signal chip_in)
+	      (messages : signal (list string))
+	      (disable_next : signal bool): signal xbody =
+    return <xml>
+      {Dlist.render
+	   (fn {PersonName = pname, Amount = amt} pos => <xml>
+	     <ctextbox source={pname} required={True}/>
+	     <cnumber source={amt} min={0.01} step={0.01} required={True} /><br/>
+	     <button value="Delete" onclick={fn _ => delete_contrib model pos}/>
+	   </xml>)
+	   {StartPosition = return None,
+	    MaxLength = return None,
+	    Filter = fn _ => return True,
+	    Sort = return None}
+	   model.Contribs}
+      <br/>
+      <button value="New row" onclick={fn _ => insert_contrib model}></button>
+      <br/>
+      <dyn signal={
+s <- summary;
+return <xml><p>Total amount: {[s.Total]}, Equal pay: {[s.EqualPayment]}</p></xml>
+}/>
+      <dyn signal={
+lstr <- messages;
+dis <- disable_next;
+return <xml>
+  <button value="Next" disabled={dis} onclick={fn _ => calculate model}></button>
+  {case lstr of
+       [] => <xml></xml>
+     | _ => <xml>
+       <p>Validation errors:</p>
+       <ul>
+	 {List.mapX (fn x => <xml><li>{[x]}</li></xml>) lstr}
+       </ul>
+     </xml>}
+</xml>}/>
+	     
+    </xml>
 
-fun render_next (lstr : list string) (next : Basis.mouseEvent -> transaction unit) : signal xbody = (
-    (* no disabled attrib for buttons? why? *)
-    case lstr of
-	Nil => return <xml><button value="Next" disabled={False} onclick={next}></button></xml>
-      | _ => return <xml>
-	<button value="Next" disabled={True}></button>
-	<p>Validation errors:</p>
-	<ul>
-	  {List.mapX (fn x => <xml><li>{[x]}</li></xml>) lstr}
-	</ul>
-      </xml>)
-
-fun render_grid (grid: contrib_list): signal xbody =
-    page <- signal grid.Page;
-    case page of
-	Initial => return <xml>
-	  {Dlist.render
-	       display_contrib
-	       {StartPosition = return None,
-		MaxLength = return None,
-		Filter = fn _ => return True,
-		Sort = return None}
-	       grid.Contribs}
-	  <button value="New row" onclick={fn _ => insert grid.Contribs}></button>
-	  <br/>
-	  <dyn signal={msg <- is_valid grid;
-		       render_next msg (fn _ => set grid.Page Calculation)}/>
-	</xml>
-      | Calculation =>
-	return <xml>
-	  <button value="Back" onclick={fn _ => set grid.Page Initial}></button>
-	    <active code={
+fun view_calculation (grid: contrib_list): signal xbody =
+    return <xml>
+      <button value="Back" onclick={fn _ => to_initial grid}></button>
+      <active code={
 chip_in <- calc_chip_in grid.Contribs;
 lst <- calc_paybacks grid.Contribs;
 return <xml>
@@ -178,21 +185,55 @@ return <xml>
   </ul>
 </xml>
 }/>	    
-	</xml>
+ </xml>
 
+(* ****** ****** *)
+(* control state *)
+
+fun
+state_chipin (model: contrib_list): signal chip_in =
+(total, count) <- Dlist.foldl
+		      (fn c ((acc, cnt) : float * int) =>
+			  amount <- signal c.Amount;
+			  return (acc + Option.get 0.0 amount, cnt+1))
+		     (0.0, 0)
+		     model.Contribs;
+return {Total = total,
+	EqualPayment = if count > 0 then total / float(count) else 0.0}
+
+fun
+state_messages (model: contrib_list): signal bool * signal (list string) =
+let
+    val msgs = is_valid model
+    val dis_next =
+	xs <- msgs;
+	return (case xs of [] => False | _ => True)
+in
+    (dis_next, msgs)
+end
+
+fun state_representation grid =
+    page <- signal grid.Page;
+    case page of
+	Initial =>
+	let
+	    val s = state_chipin grid
+	    val (dis_next, msgs) = state_messages grid
+	in
+	    view_init grid s msgs dis_next
+	end
+      | Calculation => view_calculation grid
+
+(* ****** ****** *)
+(* main page *)
+		       
 fun main (): transaction page = 
-    grid <- (rows <- Dlist.create;
-	     pos <- source Initial;
-	     return {Contribs = rows,
-                     Page = pos});
-    (* now, introduce a dyn tag that switches on page...
-simple enough right???
- *)
+    grid <- init ();
     return <xml>
       <head>
-	<title>foo</title>
+	<title>Split calculator</title>
       </head>
       <body>
-	<dyn signal={render_grid grid}/>
+	<dyn signal={state_representation grid}/>
       </body>
     </xml>

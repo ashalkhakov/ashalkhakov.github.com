@@ -9,6 +9,15 @@ rewrite url Index/main index.html
 rewrite url Index/articles_main articles.html
 rewrite url Index/articles_urweb_setup articles/urweb-setup.html
 rewrite url Index/split_calculator split-calculator.html
+# rewrite rules for split calculator
+rewrite style Split_calculator/buttonCss button
+rewrite style Split_calculator/showCss show
+rewrite style Split_calculator/stackCss stack
+rewrite style Split_calculator/errorCss error
+rewrite style Split_calculator/labelCss label
+rewrite style Split_calculator/twoCss two
+rewrite style Split_calculator/* [-]
+file /css/split-calc.css ../css/split-calc.css
 # end of rewrite rules
 allow meta author
 allow meta viewport

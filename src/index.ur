@@ -29,7 +29,7 @@ Urweb_setup.main (topmenu ())
 
 and
 split_calculator () =
-Split_calculator.main ()
+Split_calculator.appmain ()
 
 (* ****** ****** *)
 

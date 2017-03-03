@@ -131,6 +131,27 @@ fun to_initial model = set model.Page Initial
 (* ****** ****** *)
 (* view *)
 
+style card
+style third
+style tooltip_top
+style menu
+style burger
+style pseudo
+style buttonCss
+style showCss
+style stackCss
+style errorCss
+style labelCss
+style twoCss
+style brand
+style flex
+style five
+style icon_cancel_circled2
+style dangerous
+
+style calc_main
+style calc_float_left
+
 fun view_init (model: contrib_list)
 	      (summary : signal chip_in)
 	      (messages : signal (list string))
@@ -138,9 +159,13 @@ fun view_init (model: contrib_list)
     return <xml>
       {Dlist.render
 	   (fn {PersonName = pname, Amount = amt} pos => <xml>
-	     <ctextbox source={pname} required={True}/>
-	     <cnumber source={amt} min={0.01} step={0.01} required={True} /><br/>
-	     <button value="Delete" onclick={fn _ => delete_contrib model pos}/>
+	     <div class="card">
+		 <div class="third calc_float_left">
+	       <label>Name: <ctextbox title="Name" class="stackCss" source={pname} required={True}/></label>
+	       <label>Amount: <cnumber title="Amount" class="stackCss" source={amt} min={0.01} step={0.01} required={True} /></label>
+		 </div>
+	       <button class="dangerous" value="- Remove" onclick={fn _ => delete_contrib model pos}/>
+	     </div>
 	   </xml>)
 	   {StartPosition = return None,
 	    MaxLength = return None,
@@ -148,24 +173,29 @@ fun view_init (model: contrib_list)
 	    Sort = return None}
 	   model.Contribs}
       <br/>
-      <button value="New row" onclick={fn _ => insert_contrib model}></button>
+      <button value="+ Add person" onclick={fn _ => insert_contrib model}></button>
       <br/>
       <dyn signal={
 s <- summary;
-return <xml><p>Total amount: {[s.Total]}, Equal pay: {[s.EqualPayment]}</p></xml>
-}/>
-      <dyn signal={
 lstr <- messages;
 dis <- disable_next;
 return <xml>
-  <button value="Next" disabled={dis} onclick={fn _ => calculate model}></button>
+  <div class="flex twoCss">
+    <div>
+      <h4>Total amount <span class="labelCss">{[s.Total]}</span></h4>
+      <h4>Equal pay <span class="labelCss">{[s.EqualPayment]}</span></h4>
+    </div>
+    <button data-tooltip="Press the button to view calculation results" class="tooltip-top" value="Next &#x25B6;" disabled={dis} onclick={fn _ => calculate model}></button>
+  </div>
   {case lstr of
        [] => <xml></xml>
      | _ => <xml>
-       <p>Validation errors:</p>
-       <ul>
-	 {List.mapX (fn x => <xml><li>{[x]}</li></xml>) lstr}
-       </ul>
+       <article class="card">
+	 <header><h3>Validation errors</h3></header>
+	 <section>
+	   {List.mapX (fn x => <xml><span class="stackCss">{[x]}</span></xml>) lstr}
+	 </section>
+       </article>
      </xml>}
 </xml>}/>
 	     
@@ -173,16 +203,19 @@ return <xml>
 
 fun view_calculation (grid: contrib_list): signal xbody =
     return <xml>
-      <button value="Back" onclick={fn _ => to_initial grid}></button>
       <active code={
-chip_in <- calc_chip_in grid.Contribs;
+s <- calc_chip_in grid.Contribs;
 lst <- calc_paybacks grid.Contribs;
 return <xml>
-  <p>Total amount: {[chip_in.Total]}, Equal pay: {[chip_in.EqualPayment]}</p>
-  <ul>
-    {List.mapX
-	 (fn x => <xml><li>From: {[x.From]}, To: {[x.To]}, Amount: {[x.Amount]}</li></xml>) lst}
-  </ul>
+  <div class="flex twoCss">
+      <button value="Back &#x25C0;" onclick={fn _ => to_initial grid}></button>
+      <div>
+	<h4>Total amount <span class="labelCss">{[s.Total]}</span></h4>
+	<h4>Equal pay <span class="labelCss">{[s.EqualPayment]}</span></h4>
+      </div>
+  </div>
+  {List.mapX
+       (fn x => <xml><div class="card"><h3>{[x.From]} &rarr; {[x.To]} <span class="labelCss">{[x.Amount]}</span></h3></div></xml>) lst}
 </xml>
 }/>	    
  </xml>
@@ -227,13 +260,31 @@ fun state_representation grid =
 (* ****** ****** *)
 (* main page *)
 		       
-fun main (): transaction page = 
+fun appmain (): transaction page = 
     grid <- init ();
+    id_self <- fresh;
+    id_bmenug <- fresh;
+    id_home <- fresh;
     return <xml>
       <head>
 	<title>Split calculator</title>
+	<link href="https://cdn.jsdelivr.net/picnicss/6.3.2/picnic.min.css" rel="stylesheet" type="text/css" />
+	<link href="/css/split-calc.css" rel="stylesheet" type="text/css" />
       </head>
       <body>
-	<dyn signal={state_representation grid}/>
+	<div>
+	<nav>
+	  <a id={id_self} class="brand">Split calculator</a>
+
+	  <ccheckbox id={id_bmenug} class="showCss"></ccheckbox>
+	  <label for={id_bmenug} class="burger pseudo buttonCss">&#8801;</label>
+	  <div class="menu"></div>
+	</nav>
+	</div>
+	<main id={id_home} class="calc_main">
+	  <section>
+	    <dyn signal={state_representation grid}/>
+	  </section>
+	</main>
       </body>
     </xml>

@@ -1,0 +1,13 @@
+html5
+# rewrite rules for split calculator
+rewrite style Split_calculator/buttonCss button
+rewrite style Split_calculator/showCss show
+rewrite style Split_calculator/stackCss stack
+rewrite style Split_calculator/errorCss error
+rewrite style Split_calculator/labelCss label
+rewrite style Split_calculator/twoCss two
+rewrite style Split_calculator/* [-]
+file /css/split-calc.css ../css/split-calc.css
+
+$/monad
+split_calculator

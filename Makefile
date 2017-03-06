@@ -11,28 +11,24 @@ dist:
 	git clone https://github.com/ashalkhakov/ashalkhakov.github.com.git --branch master dist
 all: dist
 
-bin/dynsite: src/main.urp
+bin/site: src/main.urp
 	mkdir -p bin
 	urweb -path UTIL util src/main
 
-bin/site: src/main.urp
-	mkdir -p bin
-	urweb -protocol static -path UTIL util src/main
-
 $(PAGES_HTML): bin/site dist
-	bin/site /$@ | tail -n+3 > dist/$@
+	./dump.sh $@
 all: $(PAGES_HTML)
 
 articles.html: bin/site dist
-	bin/site /$@ | tail -n+3 > dist/$@
+	./dump.sh $@
 all: articles.html
 split-calculator.html: bin/site dist
-	bin/site /$@ | tail -n+3 > dist/$@
+	./dump.sh $@
 all: split-calculator.html
 
 $(ARTICLES_HTML): bin/site
 	mkdir -p dist/articles
-	bin/site /$@ | tail -n+3 > dist/$@
+	./dump.sh $@
 all: $(ARTICLES_HTML)
 
 dist/html2pats.html: dist

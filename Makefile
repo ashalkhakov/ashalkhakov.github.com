@@ -13,7 +13,7 @@ all: dist
 
 bin/site: src/main.urp
 	mkdir -p bin
-	urweb -path UTIL util src/main
+	urweb -path UTIL util -js split-calculator.js src/main
 
 $(PAGES_HTML): bin/site dist
 	./dump.sh $@
@@ -22,9 +22,13 @@ all: $(PAGES_HTML)
 articles.html: bin/site dist
 	./dump.sh $@
 all: articles.html
+
 split-calculator.html: bin/site dist
 	./dump.sh $@
 all: split-calculator.html
+split-calculator.js: bin/site dist
+	./dump.sh $@
+all: split-calculator.js
 
 $(ARTICLES_HTML): bin/site
 	mkdir -p dist/articles
@@ -45,6 +49,7 @@ dev: all
 
 clean:
 	rm -rf bin
+	rm -f split-calculator.js
 	cd dist && git reset --hard HEAD
 
 deploy: all

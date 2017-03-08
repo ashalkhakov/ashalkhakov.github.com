@@ -1,0 +1,48 @@
+<!DOCTYPE html><html>
+<head>
+<title>Underivable - Split calculator app</title>
+<meta content="Artyom Shalkhakov" name="author" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+<link href="/css/normalize.css" rel="stylesheet" />
+<link href="/css/skeleton.css" rel="stylesheet" />
+<link href="/css/custom.css" rel="stylesheet" />
+</head> <body>
+<div class="container">
+<nav class="navbar">
+<div class="container">
+<ul class="navbar-list">
+
+<li class="navbar-item">
+<a class="navbar-link" href="/index.html">Main</a>
+</li>
+
+<li class="navbar-item">
+<a class="navbar-link" href="/articles.html">Articles</a>
+</li>
+
+<li class="navbar-item">
+<a class="navbar-link" href="/split-calculator.html">Split calculator</a>
+</li>
+
+</ul>
+</div>
+</nav>
+<div class="row">
+<div class="column"> 
+<h1>The application</h1>
+<p>The <a href="https://ashalkhakov.github.io/split-calculator.html">app</a> itself is very simple: it allows you to enter <em>people</em> and the <em>amounts</em> they have given to cover some <em>shared cost</em> to have it calculate for you who owes what to whom. The idea is simply that costs should be shared equally among participants.</p>
+<h1>The code</h1>
+<h2>Model and actions</h2>
+<p>As you can probably see on <a href="https://github.com/ashalkhakov/ashalkhakov.github.com/blob/source/src/split_calculator.ur">GitHub</a>, in the code we define some application-specific types first: <code>contrib</code>, <code>chip_in</code>, <code>payback</code> and <code>contrib_list</code>. In particular, <code>contrib_list</code> is the <strong>model</strong>, aka the state of the application. Then we define some actions that will mutate the model: the functions like <code>insert_contrib</code> and <code>delete_contrib</code> will simply perform the processing. As an aside, in <a href="http://sam.js.org/">SAM</a>, the responsbility to make changes to the model is contained within a single "present" method, while "actions" will only create well-formed messages that are pure w.r.t. the model. My guess is that we can always emulate this approach in Ur/Web too, if necessary.</p>
+<p>Since Ur/Web is pure, how is mutation possible? Ur/Web defines an abstract type <code>source a</code> (for some type <code>a</code>), that works as a mutable <code>ref</code>-cell. Say, if you have <code>x</code> of type <code>source int</code>, then you can <code>set</code> its new value or <code>get</code> its current value. Of course, all of these operations only work in the <code>transaction</code> monad.</p>
+<h2>Rendering the model</h2>
+<p>Ur/Web provides the <code>signal</code> monad, for implementing FRP (functional-reactive programming) principles. To put it briefly, if you want to put something dynamic on the page, all the dynamism will usually come from <strong>reactions</strong> to changes of some <code>source</code>. For simplicity, form elements (like <code>input</code>s) can be hooked to <code>source</code>s, providing values for them, that is, as soon as user types something into an element, the source it is hooked to will have its value updated.</p>
+<p>How does the page react to changes to a source? In the <code>signal</code> monad, it is possible to "extract" the current value of the <code>source</code> (operationally: we subscribe to changes to the source), and use it in a further computation, which will usually end up code producing some markup.</p>
+<p>As you can see in the code, we have the function <code>state_representation</code> that computes the representation of the model's state (which is the HTML view!). For instance, we store the current "page" as a <code>source appPage</code>, then we subscribe to changes of page, which involves branching and calling different functions depeending on the current page. Simple!</p>
+
+</div>
+</div>
+</div>
+</body>
+</html>

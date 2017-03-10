@@ -17,6 +17,7 @@ Page= <xml>
   <h1>Articles</h1>
   <ul>
     <li><a href={url (articles_urweb_setup ())}>Ur/Web dev box setup</a></li>
+    <li><a href={url (articles_splitcalc ())}>Split calculator</a></li>
   </ul>
 </xml>
 })
@@ -24,6 +25,10 @@ Page= <xml>
 and
 articles_urweb_setup () =
 Urweb_setup.main (topmenu ())
+
+and
+articles_splitcalc () =
+Splitcalc.main (topmenu ())
 
 (* ****** ****** *)
 

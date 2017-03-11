@@ -2,6 +2,7 @@ fun
 topmenu (): list {Title : string, Url : url} =
 {Title= "Main", Url= url (main ())}
     :: {Title= "Articles", Url= url (articles_main ())}
+    :: {Title= "Contact", Url= url (contact ())}
     :: {Title= "Split calculator", Url= url (split_calculator ())}
     :: []
 
@@ -35,6 +36,12 @@ Splitcalc.main (topmenu ())
 and
 split_calculator () =
 Split_calculator.appmain ()
+
+(* ****** ****** *)
+
+and
+contact () =
+Contact.main (topmenu ())
 
 (* ****** ****** *)
 

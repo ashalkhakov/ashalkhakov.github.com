@@ -23,6 +23,10 @@ articles.html: bin/site dist
 	./dump.sh $@
 all: articles.html
 
+contact.html: bin/site dist
+	./dump.sh $@
+all: contact.html
+
 split-calculator.html: bin/site dist
 	./dump.sh $@
 all: split-calculator.html

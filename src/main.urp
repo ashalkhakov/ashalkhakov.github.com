@@ -10,6 +10,7 @@ rewrite url Index/articles_main articles.html
 rewrite url Index/articles_urweb_setup articles/urweb-setup.html
 rewrite url Index/articles_splitcalc articles/splitcalc.html
 rewrite url Index/split_calculator split-calculator.html
+rewrite url Index/contact contact.html
 # end of rewrite rules
 allow meta author
 allow meta viewport
@@ -25,4 +26,5 @@ template
 articles/urweb_setup
 articles/splitcalc
 split_calculator
+contact
 index

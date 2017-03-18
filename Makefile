@@ -27,6 +27,10 @@ contact.html: bin/site dist
 	./dump.sh $@
 all: contact.html
 
+projects.html: bin/site dist
+	./dump.sh $@
+all: projects.html
+
 split-calculator.html: bin/site dist
 	./dump.sh $@
 all: split-calculator.html
@@ -47,6 +51,10 @@ dist/css/%.css: css/%.css dist
 	mkdir -p dist/css
 	cp $< $@
 all: $(STYLES_DIST)
+
+dist/fj: dist
+	cp -Rf fj dist/fj
+all: dist/fj
 
 dev: all
 	cd dist && python -m SimpleHTTPServer 8000

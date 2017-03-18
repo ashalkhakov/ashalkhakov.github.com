@@ -1,0 +1,11 @@
+/* calculator example */
+* {font-size:1em}
+#calc {margin:1em}
+#calc .results {border-width: 1px; clear: both; float:none; margin:0.5em; padding:0; width: 20em;}
+#calc .results input {border-width:1px; text-align:center; width:16em;}
+#calc .results input.rna {font-weight:bold;}
+#calc .pad {border-width:1px; clear:none; float:left; margin:0.5em; padding:0;}
+#calc .num.pad {width:9em;}
+#calc .operator.pad {width:6em;}
+#calc .pad button {border-width:1px; clear:none; float:left; font-weight:bold; height:1.5em; margin:0; padding:0; text-align:center; width:3em;}
+#calc .operator.pad button {height:2em;}

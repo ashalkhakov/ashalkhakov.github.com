@@ -35,7 +35,7 @@ Splitcalc.main (topmenu ())
 
 and
 projects_main (): transaction page =
-Projects.main (topmenu ())
+Projects.main (url (split_calculator ())) (topmenu ())
 
 (* ****** ****** *)
 

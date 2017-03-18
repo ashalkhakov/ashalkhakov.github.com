@@ -1,17 +1,17 @@
 open Tagffi
 
-fun main (nav : list {Title : string, Url : url}) : transaction page =
+fun main (spc: url) (nav : list {Title : string, Url : url}) : transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Projects",
-Navigation= topmenu (),
+Navigation= nav,
 Page= <xml>
   <h1>Projects</h1>
 
   <h2>2017</h2>
   <ul>
     <li><a href="https://github.com/ashalkhakov/urweb-misc">urweb-misc</a></li>
-    <li><a href={url (split_calculator ())}>Split calculator</a> (Ur/Web-based)</li>
+    <li><a href={spc}>Split calculator</a> (Ur/Web-based)</li>
     <li><a href="https://ashalkhakov.github.io/pats-ef">PATS-EF</a>: an online "error filter", for making sense of type errors of ATS2</li>
     <li><a href="https://ashalkhakov.github.io/sam-tetris/">SAM-tetris</a>:
       a Tetris clone structured according to

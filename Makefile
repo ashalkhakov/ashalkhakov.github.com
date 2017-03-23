@@ -5,7 +5,7 @@ PAGES_HTML := $(subst _,-,$(patsubst %.ur,%.html,$(PAGES_SRC)))
 STYLES := $(wildcard css/*.css)
 STYLES_DIST := $(patsubst %.css,dist/%.css,$(STYLES))
 
-.PHONY: all clean deploy
+.PHONY: all clean test
 
 bin/site: src/main.urp
 	mkdir -p bin
@@ -34,6 +34,3 @@ all: $(STYLES_DIST)
 clean:
 	rm -rf bin
 	rm -rf dist
-
-deploy: all
-	cd dist && git add --all && git commit -m \"Release at $(date)\" && git push

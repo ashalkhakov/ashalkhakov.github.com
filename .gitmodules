@@ -1,0 +1,3 @@
+[submodule "src/uwp"]
+	path = src/uwp
+	url = https://github.com/ashalkhakov/urweb-projects.git

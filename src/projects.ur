@@ -12,6 +12,8 @@ Page= <xml>
 
   <h2>2017</h2>
   <ul>
+    <li><a link={Sam.main ()}>Ur/Web + SAM</a>: translating SAM pattern to Ur/Web</li>
+    <li><a link={Xforms.main ()}>Ur/Web + XForms</a>: translating XForms examples to Ur/Web</li>
     <li><a href="https://github.com/ashalkhakov/urweb-storage">urweb-storage</a>: support for HTML web storage API in Ur/Web</li>
     <li><a href="https://github.com/ashalkhakov/urweb-misc">urweb-misc</a>: Ur/Web code, including a toy relational algebra interpreter</li>
     <li><a href={spc}>Split calculator</a> (Ur/Web-based)</li>

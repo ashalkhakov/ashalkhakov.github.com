@@ -4,6 +4,8 @@ PAGES_SRC := index.ur
 PAGES_HTML := $(subst _,-,$(patsubst %.ur,%.html,$(PAGES_SRC)))
 STYLES := $(wildcard css/*.css)
 STYLES_DIST := $(patsubst %.css,dist/%.css,$(STYLES))
+XFORMS_HTML := xforms/main.html xforms/ex_input.html xforms/ex_incremental.html xforms/ex_checkbox.html xforms/ex_select_model.html xforms/ex_button.html xforms/ex_calculator.html xforms/ex_contact.html xforms/ex_writers.html
+SAM_HTML := sam/main.html sam/rocket.html sam/todosam.html
 
 .PHONY: all clean deploy dev
 
@@ -13,11 +15,20 @@ all: dist
 
 bin/site: src/main.urp
 	mkdir -p bin
-	urweb -path UTIL util -js split-calculator.js src/main
+	urweb -path UTIL util -js split-calculator.js -path UWP uwp src/main
 
 $(PAGES_HTML): bin/site dist
 	./dump.sh $@
 all: $(PAGES_HTML)
+
+$(XFORMS_HTML): bin/site dist
+	mkdir -p dist/xforms
+	./dump.sh $@
+all: $(XFORMS_HTML)
+$(SAM_HTML): bin/site dist
+	mkdir -p dist/sam
+	./dump.sh $@
+all: $(SAM_HTML)
 
 articles.html: bin/site dist
 	./dump.sh $@

@@ -18,6 +18,20 @@ allow meta viewport
 # start of libraries
 library $UTIL/util
 library split_calculator
+library $UWP/xforms/xforms
+rewrite url Xforms/main xforms/main.html
+rewrite url Xforms/ex_input xforms/ex_input.html
+rewrite url Xforms/ex_incremental xforms/ex_incremental.html
+rewrite url Xforms/ex_checkbox xforms/ex_checkbox.html
+rewrite url Xforms/ex_select_model xforms/ex_select_model.html
+rewrite url Xforms/ex_button xforms/ex_button.html
+rewrite url Xforms/ex_calculator xforms/ex_calculator.html
+rewrite url Xforms/ex_contact xforms/ex_contact.html
+rewrite url Xforms/ex_writers xforms/ex_writers.html
+library $UWP/sam/sam
+rewrite url Sam/main sam/main.html
+rewrite url Sam/rocket sam/rocket.html
+rewrite url Sam/todosam sam/todosam.html
 # end of libraries
 
 styling

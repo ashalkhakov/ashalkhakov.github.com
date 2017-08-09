@@ -32,6 +32,7 @@ library $UWP/sam/sam
 rewrite url Sam/main sam/main.html
 rewrite url Sam/rocket sam/rocket.html
 rewrite url Sam/todosam sam/todosam.html
+rewrite url Child/child_instance sam/child-instance.html
 # end of libraries
 
 styling

@@ -5,7 +5,7 @@ PAGES_HTML := $(subst _,-,$(patsubst %.ur,%.html,$(PAGES_SRC)))
 STYLES := $(wildcard css/*.css)
 STYLES_DIST := $(patsubst %.css,dist/%.css,$(STYLES))
 XFORMS_HTML := xforms/main.html xforms/ex_input.html xforms/ex_incremental.html xforms/ex_checkbox.html xforms/ex_select_model.html xforms/ex_button.html xforms/ex_calculator.html xforms/ex_contact.html xforms/ex_writers.html
-SAM_HTML := sam/main.html sam/rocket.html sam/todosam.html
+SAM_HTML := sam/main.html sam/rocket.html sam/todosam.html sam/child-instance.html
 
 .PHONY: all clean deploy dev
 

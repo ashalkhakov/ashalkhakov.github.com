@@ -12,6 +12,9 @@ Page= <xml>
 
   <h2>2017</h2>
   <ul>
+    <li><a href="https://github.com/ashalkhakov/ATStead">ATStead</a>: a modeless structured editor written in ATS (yeah, I suck at naming)</li>
+    <li><a href="https://github.com/ashalkhakov/urweb-uuid">urweb-uuid</a>: support for UUID datatype in Ur/Web</li>
+    <li><a href="https://github.com/ashalkhakov/urweb-projects">urweb-projects</a>: various Ur/Web-based projects that will someday evolve into something useful</li>
     <li><a link={Sam.main ()}>Ur/Web + SAM</a>: translating SAM pattern to Ur/Web</li>
     <li><a link={Xforms.main ()}>Ur/Web + XForms</a>: translating XForms examples to Ur/Web</li>
     <li><a href="https://github.com/ashalkhakov/urweb-storage">urweb-storage</a>: support for HTML web storage API in Ur/Web</li>

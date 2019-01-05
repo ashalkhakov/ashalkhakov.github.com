@@ -1,39 +1,34 @@
 <!DOCTYPE html><html>
-<head>
+<head><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" src="/split-calculator.js"></script>
+
 <title>Underivable - Split calculator app</title>
 <meta content="Artyom Shalkhakov" name="author" />
 <meta content="width=device-width, initial-scale=1" name="viewport" />
-<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
 <link href="/css/normalize.css" rel="stylesheet" />
-<link href="/css/skeleton.css" rel="stylesheet" />
 <link href="/css/custom.css" rel="stylesheet" />
-</head> <body>
-<div class="container">
-<nav class="navbar">
-<div class="container">
-<ul class="navbar-list">
+<link href="/css/pushy.css" rel="stylesheet" />
+</head>
+<body onunload='unloading=true;;unload()'>
+<nav class="pushy pushy-left">
+<div class="pushy-content">
+<ul>
 
-<li class="navbar-item">
-<a class="navbar-link" href="/index.html">Main</a>
-</li>
+<li class="pushy-link"><a href="/index.html">Main</a></li>
 
-<li class="navbar-item">
-<a class="navbar-link" href="/articles.html">Articles</a>
-</li>
+<li class="pushy-link"><a href="/articles.html">Articles</a></li>
 
-<li class="navbar-item">
-<a class="navbar-link" href="/projects.html">Projects</a>
-</li>
+<li class="pushy-link"><a href="/projects.html">Projects</a></li>
 
-<li class="navbar-item">
-<a class="navbar-link" href="/contact.html">Contact</a>
-</li>
+<li class="pushy-link"><a href="/contact.html">Contact</a></li>
 
 </ul>
 </div>
 </nav>
-<div class="row">
-<div class="column"> 
+<div class="site-overlay"></div>
+<div id="container">
+<button class="menu-btn">☰ Menu</button>
+
 <h1>Introduction</h1>
 <p>Currently, there is a lot of churn in web frontend technology: libraries and frameworks are created almost weekly, to get obsoleted and forgotten just as quickly. Most of the churn is presented as innovation. It seems to me that programmers are just too eager to jump onto the next "newer, better" technology (well, at least I had to do it a few times at work: just pick <em>something</em>, and hope it will work for your project).</p>
 <p>Which is where we come to <a href="http://www.impredicative.com/ur">Ur/Web</a>. What is it?</p>
@@ -58,7 +53,6 @@
 <p>As you can see in the code, we have the function <code>state_representation</code> that computes the representation of the model's state (which is the HTML view!). For instance, we store the current "page" as a <code>source appPage</code>, then we subscribe to changes of page, which involves branching and calling different functions depending on the current page. Simple!</p>
 
 </div>
-</div>
-</div>
+<script type="text/javascript">active(execD({c:"a",f:{c:"n",n:2942},x:{c:"c",v:null}}))</script>
 </body>
 </html>

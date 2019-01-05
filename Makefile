@@ -67,6 +67,15 @@ dist/fj: dist
 	cp -Rf fj dist/fj
 all: dist/fj
 
+dist/js/pushy.js: dist
+	mkdir -p dist/js
+	./dump.sh js/pushy.js
+all: dist/js/pushy.js
+dist/css/pushy.css: dist
+	mkdir -p dist/css
+	./dump.sh css/pushy.css
+all: dist/css/pushy.css
+
 dev: all
 	cd dist && python -m SimpleHTTPServer 8000
 

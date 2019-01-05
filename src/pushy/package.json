@@ -1,0 +1,8 @@
+{
+  "name": "pushy-urweb",
+  "title": "Pushy menu for urweb apps",
+  "description": "This allows you to use a push-style menu on an urweb page",
+  "author": "Artyom Shalkhakov",
+  "license": "BSD v3",
+  "version": "1.0"
+}

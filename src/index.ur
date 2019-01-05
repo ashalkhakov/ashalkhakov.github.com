@@ -1,9 +1,9 @@
 fun
-topmenu (): list {Title : string, Url : url} =
-{Title= "Main", Url= url (main ())}
-    :: {Title= "Articles", Url= url (articles_main ())}
-    :: {Title= "Projects", Url= url (projects_main ())}
-    :: {Title= "Contact", Url= url (contact ())}
+topmenu (): list {Title : string, Link : url} =
+{Title= "Main", Link= url (main ())}
+    :: {Title= "Articles", Link= url (articles_main ())}
+    :: {Title= "Projects", Link= url (projects_main ())}
+    :: {Title= "Contact", Link= url (contact ())}
     :: []
 
 (* ****** ****** *)
@@ -56,12 +56,10 @@ main () : transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Home",
-Navigation= topmenu (),
+Navigation= topmenu ()
 Page= <xml>
   <h1>Welcome to Underivable</h1>
-  <p>This website will host certain curiousities, such as
-    information on using the <a href="http://www.ats-lang.org">ATS</a>
-    programming language
-  </p>
+
+  <p>This is a personal website of Artyom Shalkhakov. It exists to catalogue projects I worked on, and articles I have written (both of these are diminishingly small).</p>
 </xml>
 })

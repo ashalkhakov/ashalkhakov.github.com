@@ -3,6 +3,8 @@ exe ../bin/site
 debug
 ffi tagffi
 allow url *
+file /css/custom.css ../css/custom.css
+file /css/normalize.css ../css/normalize.css
 rewrite style Styling/s_* [-]
 # rewrite rules
 rewrite url Index/main index.html
@@ -16,6 +18,7 @@ rewrite url Index/contact contact.html
 allow meta author
 allow meta viewport
 # start of libraries
+library pushy
 library $UTIL/util
 library split_calculator
 library $UWP/xforms/xforms

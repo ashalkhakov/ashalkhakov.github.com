@@ -1,7 +1,7 @@
 open Tagffi
 
 fun
-main (nav : list {Title : string, Url : url})  : transaction page =
+main (nav : list {Title : string, Link : url})  : transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Contact",
@@ -26,8 +26,7 @@ Page = <xml>
 
   <ul>
     <li><a href="http://www.impredicative.com/ur">Ur/Web compiler</a> for powering this website</li>
-    <li><a href="http://getskeleton.com/">Skeleton</a> for nice styling</li>
-    <li><a href="https://picnicss.com/">Picnic CSS</a> for nice styling</li>
+    <li><a href="https://chrisyee.ca/pushy/">Pushy</a> for the menu</li>
   </ul>
 </xml>
 })

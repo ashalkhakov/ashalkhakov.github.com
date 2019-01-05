@@ -1,6 +1,6 @@
 open Tagffi
 
-fun main (spc: url) (nav : list {Title : string, Url : url}) : transaction page =
+fun main (spc: url) (nav : list {Title : string, Link : url}) : transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Projects",
@@ -9,6 +9,21 @@ Page= <xml>
   <h1>Projects</h1>
 
   <p>Personal projects of mine. At work, I have been mostly building enterprise (aka data entry) applications, these will not be mentioned here.</p>
+
+  <h2>2018</h2>
+
+  <ul>
+    <li><a href="https://github.com/ashalkhakov/urwebfmt">urwebfmt</a>: a separate pretty-printer for ur/web code</li>
+    <li><a href="https://github.com/ashalkhakov/typesafe-dom">typesafe-dom</a>: typeful DOM access for ATS in the browser</li>
+    <li><a href="https://github.com/ashalkhakov/tfc">tfc</a>: simple cooperative threading for ATS</li>
+    <li><a href="https://github.com/ashalkhakov/colorado">colorado</a>: a very simple library for colored output in the terminal, for ATS</li>
+    <li>
+      <a href="https://github.com/rfid-applied/WinCeWebDriver">WinCeWebDriver</a>: a webdriver implementation for WinCE devices (allows you to test your WinCE apps written in WinForms by simulating end-user actions, much like you'd test your browser apps with Selenium)
+    </li>
+    <li>
+      I also put some time to contribute to existing open-source projects (<a href="http://www.impredicative.com/ur/">Ur/Web</a>, <a href="http://www.ats-lang.org">ATS</a> and <a href="https://github.com/Mimetis/Dotmim.Sync">Dotmim.Sync</a>)
+    </li>
+  </ul>
 
   <h2>2017</h2>
   <ul>
@@ -21,11 +36,10 @@ Page= <xml>
     <li><a href="https://github.com/ashalkhakov/urweb-misc">urweb-misc</a>: Ur/Web code, including a toy relational algebra interpreter</li>
     <li><a href={spc}>Split calculator</a> (Ur/Web-based)</li>
     <li><a href="https://ashalkhakov.github.io/pats-ef">PATS-EF</a>: an online "error filter", for making sense of type errors of ATS2</li>
-    <li><a href="https://ashalkhakov.github.io/sam-tetris/">SAM-tetris</a>:
-      a Tetris clone structured according to
-      the <a href="https://sam.js.org"><strong>SAM (State, Action,
-	Model)</strong></a> pattern. A bit unfinished (only keyboard
-	input is supported).</li>
+    <li><a href="https://ashalkhakov.github.io/sam-tetris/">SAM-tetris</a>: a Tetris clone structured according to the <a href="https://sam.js.org"><strong>SAM (State, Action, Model)</strong></a> pattern. A bit unfinished (only keyboard input is supported).</li>
+    <li>
+      <a href="https://github.com/ashalkhakov/atscntrb-as-getopt">getopt</a>: a library for parsing command-line arguments in ATS console programs
+    </li>
   </ul>
 
   <h2>2015 - 2016</h2>
@@ -50,7 +64,7 @@ Page= <xml>
     <li><a href="https://github.com/ashalkhakov/sqliteclientsyn">SQLiteClientSync</a>: SQLite client sync provider for ADO.NET Sync Services for Devices (ported to WinMobile 6.5/.NET CF from its original desktop version, with author's permission). This is for implementing off-line applications with hub-and-spoke synchronization and conflict resolution.</li>
     <li><a href="https://github.com/ashalkhakov/nixpkgs/tree/gnustep">Support</a> for <a href="https://en.wikipedia.org/wiki/GNUstep">GNUstep</a> on <a href="https://nixos.org/">NixOS</a>: abandoned, but it was picked up by <a href="https://github.com/matthewbauer">@matthewbauer</a> and brought to fruition (thanks, Matthew!)</li>
   </ul>
-    
+
   <h2>2012</h2>
   <ul>
     <li><a href="https://github.com/ashalkhakov/agda-tutorial-exercises">Exercises</a> from the <a href="http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf">Agda tutorial</a> by Ulf Norrel (contains spoilers!)</li>
@@ -73,14 +87,14 @@ Page= <xml>
     </li>
     <li>
       <p>2004: <a href="https://goo.gl/photos/rbJe6dReYGa6Vfwz7">Quake2 studiomdl support</a></p>
-      <p>What if you wanted to make a computer game based on Quake2, but you need some Half-Life features for it, such as skeletal animation and its perks: hitboxes, animation blending, "mounting" points for weapons? What we did here (jointly with Dmitry Shalkhakov, who did most of the game improvements, while I did the renderer improvements): get the source code of MDL viewer off Valve SDK, and try to integrate it into Quake2. See the result for yourself: I only put <a href="http://gamebanana.com/skins/152565">some</a> <a href="http://gamebanana.com/skins/153708">newer</a> <a href="http://gamebanana.com/skins/15395">models</a> to show it off.</p>    
+      <p>What if you wanted to make a computer game based on Quake2, but you need some Half-Life features for it, such as skeletal animation and its perks: hitboxes, animation blending, "mounting" points for weapons? What we did here (jointly with Dmitry Shalkhakov, who did most of the game improvements, while I did the renderer improvements): get the source code of MDL viewer off Valve SDK, and try to integrate it into Quake2. See the result for yourself: I only put <a href="http://gamebanana.com/skins/152565">some</a> <a href="http://gamebanana.com/skins/153708">newer</a> <a href="http://gamebanana.com/skins/15395">models</a> to show it off.</p>
       <p>Working features:</p>
       <ul>
 	<li>Half-Life MDL models can be used alongside existing MD2 models</li>
 	<li>Animation blending</li>
 	<li>Separate "gait sequence" for player character</li>
 	<li>Chrome effect and proper colored lighting for MDL models</li>
-      </ul>      
+      </ul>
     </li>
       <!-- 2007: diploma project (graphics) - make it compile!
 2006: 3d graphics stuff

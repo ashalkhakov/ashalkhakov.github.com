@@ -1,7 +1,7 @@
 open Tagffi
 
 fun
-main (nav: list {Title : string, Url : url}): transaction page =
+main (nav: list {Title : string, Link : url}): transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Setting up Ur/Web for development on Ubuntu 16.10",
@@ -44,7 +44,7 @@ echo '(load "urweb-mode-startup")' &gt;&gt; ~/.emacs</code></pre>
   (allows Emacs to invoke a build tool in background as soon as a
   source file is changed, refreshing the def-use file).
 </p>
-    
+
 <pre><code>cd
 git clone https://github.com/ramLlama/mlton-emacs
 echo "(add-to-list 'load-path \"`pwd`/mlton-emacs/\")" &gt;&gt; ~/.emacs

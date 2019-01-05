@@ -56,7 +56,7 @@ main () : transaction page =
 return (
 Template.template_main {
 Title= "Underivable - Home",
-Navigation= topmenu ()
+Navigation= topmenu (),
 Page= <xml>
   <h1>Welcome to Underivable</h1>
 

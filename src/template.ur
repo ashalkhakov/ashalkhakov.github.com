@@ -21,8 +21,17 @@ template_main (content :
          {Left = True, Main = List.mp (fn x => {Item = x, Submenu = []}) content.Navigation}
          (fn menubutton =>
              <xml>
-               {menubutton}
                <section>
+                 <header>
+                   <nav>
+                     <ul><li><h1>{[content.Title]}</h1></li></ul>
+                   </nav>
+                   <nav>
+                     <ul>
+                       <li>{menubutton}</li>
+                     </ul>
+                   </nav>
+                 </header>
                  <article>
 	           {content.Page}
                  </article>

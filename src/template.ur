@@ -1,4 +1,5 @@
 open Styling
+open Tagffi
 
 fun
 template_main (content :
@@ -11,6 +12,7 @@ template_main (content :
     <meta name="author" content="Artyom Shalkhakov" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/tacit-css-1.3.6.min.css"/>
     <link rel="stylesheet" href="/css/custom.css" />
     {Pushy.pushy_require}
   </head>
@@ -20,7 +22,39 @@ template_main (content :
          (fn menubutton =>
              <xml>
                {menubutton}
-	       {content.Page}
+               <section>
+                 <article>
+	           {content.Page}
+                 </article>
+                 <footer>
+                   <nav>
+                     <ul>
+                       <li>
+                         <small>Copyright 2016-2019 Artyom Shalkhakov</small>
+                       </li>
+                     </ul>
+                   </nav>
+                   <nav>
+                     <ul>
+                       <li>
+                         <small>
+                           <a href="http://www.impredicative.com/ur">Ur/Web</a>
+                         </small>
+                       </li>
+                       <li>
+                         <small>
+                           <a href="https://github.com/yegor256/tacit">Tacit</a>
+                         </small>
+                       </li>
+                       <li>
+                         <small>
+                           <a href="https://chrisyee.ca/pushy/">Pushy</a>
+                         </small>
+                       </li>
+                     </ul>
+                   </nav>
+                 </footer>
+               </section>
              </xml>)
     }
   </body>

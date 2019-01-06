@@ -19,14 +19,5 @@ Page = <xml>
   <h1>About</h1>
 
   <p>This is a personal website of Artyom Shalkhakov</p>
-
-  <h1>Credits</h1>
-
-  <p>Since I don't have a footer yet, let me give credit where it is due:</p>
-
-  <ul>
-    <li><a href="http://www.impredicative.com/ur">Ur/Web compiler</a> for powering this website</li>
-    <li><a href="https://chrisyee.ca/pushy/">Pushy</a> for the menu</li>
-  </ul>
 </xml>
 })

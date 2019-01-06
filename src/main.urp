@@ -5,6 +5,7 @@ ffi tagffi
 allow url *
 file /css/custom.css ../css/custom.css
 file /css/normalize.css ../css/normalize.css
+file /css/tacit-css-1.3.6.min.css ../css/tacit-css-1.3.6.min.css
 rewrite style Styling/s_* [-]
 # rewrite rules
 rewrite url Index/main index.html

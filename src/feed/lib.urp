@@ -1,0 +1,7 @@
+ffi atom
+allow url http://www.w3.org/2005/Atom
+allow mime application/atom+xml
+allow mime text/html
+
+$/list
+feed

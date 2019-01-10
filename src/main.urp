@@ -41,6 +41,8 @@ rewrite url Sam/todosam sam/todosam.html
 rewrite url Child/child_instance sam/child-instance.html
 # end of libraries
 
+types
+config
 styling
 $/list
 $/monad

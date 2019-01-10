@@ -1,0 +1,5 @@
+library lib
+allow url author@example.com
+
+$/list
+demo

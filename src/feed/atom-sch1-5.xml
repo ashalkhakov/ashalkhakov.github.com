@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema ns="http://www.w3.org/1999/xhtml" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:s="http://www.ascc.net/xml/schematron" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <s:pattern name="authorRequired">
+    <s:rule context="atom:feed">
+      <s:assert test="atom:author or not(atom:entry[not(atom:author)])">An atom:feed must have an atom:author unless all of its atom:entry children have an atom:author.</s:assert>
+    </s:rule>
+  </s:pattern>
+  <s:pattern name="entryRequired">
+    <s:rule context="atom:entry">
+      <s:assert test="atom:link[@rel='alternate'] or atom:link[not(@rel)] or atom:content">An atom:entry must have at least one atom:link element with a rel attribute of 'alternate' or an atom:content.</s:assert>
+    </s:rule>
+    <s:rule context="atom:entry">
+      <s:assert test="atom:author or ../atom:author or atom:source/atom:author">An atom:entry must have an atom:author if its feed does not.</s:assert>
+    </s:rule>
+  </s:pattern>
+</s:schema>

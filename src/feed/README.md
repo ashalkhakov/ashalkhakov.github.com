@@ -12,6 +12,7 @@ Please see `demo.ur`.
 
 * install `xmllint` (it is located in `libxml2-utils` package on
   Ubuntu)
+* install `xsltproc` (it is located in `xsltproc` package on Ubuntu)
 * run `demo.sh`: it will build and validate the produced feed
 
 # Credits

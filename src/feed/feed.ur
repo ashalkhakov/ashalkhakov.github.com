@@ -1,5 +1,24 @@
 open Atom
 
+(* replace all occurrences of [ss] in [s] with [xs] *)
+fun replace (s : string) (ss : string) (xs : string) =
+    let
+        val sslen = strlen ss
+
+        fun aux s acc =
+            case strsindex s ss of
+                Some i =>
+                let
+                    val s0 = substring s 0 i
+                    val s1 = strsuffix s (i+sslen)
+                in
+                    aux s1 (acc ^ s0 ^ xs)
+                end
+              | None => acc ^ s
+    in
+        aux s ""
+    end
+
 type author = xbody
 type entry = xbody
 type collection = xbody
@@ -27,7 +46,7 @@ fun mkEntry x =
         <link href={x.Link}/>
         <link type={x.Typ} rel="alternate" href={x.Link}/>
         <title>{[x.Title]}</title>
-        <published>{[x.Published]}</published>
+        <published>{[timefmt x.Published]}</published>
         <updated>{[timefmt x.Updated]}</updated>
         {x.Author}
         <summary>{[x.Summary]}</summary>
@@ -51,6 +70,15 @@ fun mkFeed self fd =
     </feed>
   </xml>
 
-
 fun atom (fd : feed) : transaction page =
-    returnBlob (textBlob (show fd)) (blessMime "application/atom+xml")
+let
+    val f = show fd
+    (* FIXME: kinda defeats the points of having strongly typed XML but
+     * since we can't redefine tags that clash with built-ins we have no other choice
+     * but to do replacements either at AST level, or even at the textual level
+     *)
+    val f = replace f "<atomentry>" "<entry>"
+    val f = replace f "</atomentry>" "</entry>"
+in
+    returnBlob (textBlob f) (blessMime "application/atom+xml")
+end

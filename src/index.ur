@@ -10,19 +10,22 @@ topmenu (): list pagenav =
 
 and
 articles (): list article =
+
 let
 
 in
-    {Title= "Ur/Web dev box setup",
-      Link = url (articles_urweb_setup ()),
-      Author = Config.blog.Author,
-      Published = fromDatetime 2016 8 1 0 0 0,
-      Summary = "Setting up for Ur/Web development on Ubuntu"} ::
      {Title="Split calculator",
       Link = url (articles_splitcalc ()),
       Author = Config.blog.Author,
-      Published = fromDatetime 2017 4 2 0 0 0,
+      Published = fromDatetime 2017 2 21 15 55 38,
+      Updated = None,
       Summary = "Some rambling about the split calculator app"} ::
+    {Title= "Ur/Web dev box setup",
+      Link = url (articles_urweb_setup ()),
+      Author = Config.blog.Author,
+      Published = fromDatetime 2017 2 6 21 0 5,
+      Updated = None,
+      Summary = "Setting up for Ur/Web development on Ubuntu"} ::
     []
 end
 
@@ -30,31 +33,31 @@ end
 
 and
 articles_feed (): transaction page =
-t <- now;
 let
-    val entries =
-        List.foldl (fn x acc =>
+    val (entries, up) =
+        List.foldl (fn x (acc, up0) =>
                        let
                            val author = Feed.mkAuthor x.Author
+                           val upd = (case x.Updated of None => x.Published | Some r => r) : time
                            val entry =
-                               Feed.mkEntry (x -- #Link -- #Author
+                               Feed.mkEntry (x -- #Link -- #Author -- #Updated
                                                ++ {Id = show x.Link,
                                                    Link = x.Link,
                                                    Typ = blessMime "text/html",
                                                    Author = author,
-                                                   Updated = x.Published,
+                                                   Updated = upd,
                                                    Content = x.Summary})
                        in
-                           Feed.append acc entry
+                           (Feed.append acc entry, max upd up0)
                        end)
-                   Feed.empty
+                   (Feed.empty, minTime)
                    (articles ())
     val fd = Feed.mkFeed (url (articles_feed ()))
                          { Link = url (main ()),
                            Title = Config.blog.Title,
                            Subtitle = Config.blog.Subtitle,
                            Id = Config.blog.Id,
-                           Updated = t,
+                           Updated = up,
                            Entries = entries
                          }
 in

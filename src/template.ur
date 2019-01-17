@@ -46,6 +46,9 @@ template_main (content :
                    <nav>
                      <ul>
                        <li>
+                         <small><a href="/atom.xml">Feed</a></small>
+                       </li>
+                       <li>
                          <small>
                            <a href="http://www.impredicative.com/ur">Ur/Web</a>
                          </small>

@@ -15,13 +15,13 @@ rewrite url Index/articles_splitcalc articles/splitcalc.html
 rewrite url Index/split_calculator split-calculator.html
 rewrite url Index/projects_main projects.html
 rewrite url Index/contact contact.html
-rewrite url Index/articles_feed feed.xml
 # end of rewrite rules
 allow meta author
 allow meta viewport
 # start of libraries
 library pushy
 library feed
+rewrite url Index/articles_feed atom.xml
 library $UTIL/util
 library split_calculator
 library $UWP/xforms/xforms

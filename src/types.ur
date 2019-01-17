@@ -5,6 +5,7 @@ type article =
       Link : url,
       Author : author,
       Published : time,
+      Updated : option time,
       Summary : string
      }
 type blog = {Id : string,

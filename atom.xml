@@ -1,0 +1,38 @@
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>Underivable</title>
+<subtitle>A weblog</subtitle>
+<link href="/index.html" />
+<link href="/atom.xml" rel="self" type="application/atom+xml" />
+<updated>2017-03-21T15:55:38Z</updated>
+<id>https://ashalkhakov.github.io</id>
+
+<entry>
+<id>/articles/splitcalc.html</id>
+<link href="/articles/splitcalc.html" />
+<link href="/articles/splitcalc.html" rel="alternate" type="text/html" />
+<title>Split calculator</title>
+<published>2017-03-21T15:55:38Z</published>
+<updated>2017-03-21T15:55:38Z</updated>
+<author>
+<name>Artyom Shalkhakov</name>
+</author>
+<summary>Some rambling about the split calculator app</summary>
+<content>Some rambling about the split calculator app</content>
+</entry>
+
+<entry>
+<id>/articles/urweb-setup.html</id>
+<link href="/articles/urweb-setup.html" />
+<link href="/articles/urweb-setup.html" rel="alternate" type="text/html" />
+<title>Ur/Web dev box setup</title>
+<published>2017-03-06T21:00:05Z</published>
+<updated>2017-03-06T21:00:05Z</updated>
+<author>
+<name>Artyom Shalkhakov</name>
+</author>
+<summary>Setting up for Ur/Web development on Ubuntu</summary>
+<content>Setting up for Ur/Web development on Ubuntu</content>
+</entry>
+
+</feed>
